@@ -1,0 +1,28 @@
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    padding-top: 100px;
+}
+
+.btn-container button {
+    padding: 24px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.info-container {
+    display: flex;
+    justify-content: center;
+}
+
+.score-container {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+.winner-container {
+    display: flex;
+    justify-content: center;
+}
