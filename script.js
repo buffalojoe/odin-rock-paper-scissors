@@ -16,13 +16,12 @@ function checkWinner() {
     if (humanScore == 5 || computerScore == 5) {
         if (humanScore == 5) {
             winner.textContent = "You win! Take that, processor scum!";
-            removeButtons();
+            endGame();
         } else {
             winner.textContent = "Computer wins! AI takes over the world!";
-            removeButtons();
+            endGame();
         }
     }
-    console.log("Check winner ran")
 }
 
 function removeButtons() {
@@ -67,45 +66,46 @@ function playRound(computerChoice, humanChoice) {
 }
 
 function playGame() {
-
-    playRound(getComputerChoice(), getHumanChoice());
-    console.log("Computer Score: " + computerScore);
-    console.log("Human Score: " + humanScore);
-
-
-    if (computerScore > humanScore) {
-        console.log("Computer wins! AI takes over the world!");
-    } else {
-        console.log("Human wins! Take that, processor scum!");
-    }
+    btnRock.addEventListener("click", playRock);   
+    btnPaper.addEventListener("click", playPaper);   
+    btnScissors.addEventListener("click", playScissors);
 }
 
+function endGame() {
+    btnRock.removeEventListener("click", playRock);
+    btnPaper.removeEventListener("click", playPaper);
+    btnScissors.removeEventListener("click", playScissors);
+    const replay = document.querySelector(".replay-container");
+    const btnReplay = document.createElement("button");
+    btnReplay.textContent = "Play Again";
+    btnReplay.style.padding = "24px";
+    btnReplay.style.fontSize = "24px";
+    btnReplay.style.fontWeight = "bold";
+    replay.appendChild(btnReplay);
+
+    btnReplay.addEventListener("click", () => {
+        location.reload();
+    });
+}
+
+function playRock() {
+    playRound(getComputerChoice(), "Rock");
+}
+
+function playPaper() {
+    playRound(getComputerChoice(), "Paper");
+}
+
+function playScissors() {
+    playRound(getComputerChoice(), "Scissors");
+}
 
 let computerScore = 0;
 let humanScore = 0;
-let removePlay = 0;
 
 const winner = document.querySelector(".winner-announcement");
 const btnRock = document.querySelector(".btn-rock");
 const btnPaper = document.querySelector(".btn-paper");
 const btnScissors = document.querySelector(".btn-scissors");
 
-btnRock.addEventListener("click", () => {
-
-    playRound(getComputerChoice(), "Rock");
-
-})
-
-btnPaper.addEventListener("click", () => {
-
-    playRound(getComputerChoice(), "Paper");
-
-})
-
-
-btnScissors.addEventListener("click", () => {
-    
-    playRound(getComputerChoice(), "Scissors");
-
-})
-//playGame();
+playGame();
